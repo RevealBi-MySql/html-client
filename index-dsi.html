@@ -10,14 +10,21 @@
 <body>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
-    <script src="https://dl.revealbi.io/reveal/libs/1.7.0/infragistics.reveal.js"></script>
-
+    <script src="https://dl.revealbi.io/reveal/libs/1.7.1/infragistics.reveal.js"></script>
+Select Customer
     <select name="customers" id="customerId">
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="11">11</option>
         <option value="12">12</option>
+    </select>
+Select Order
+    <select name="orders" id="orderId">
+        <option value="31">31</option>
+        <option value="42">42</option>
+        <option value="51">51</option>
+        <option value="81">81</option>
     </select>
     <p></p>
 
@@ -41,28 +48,31 @@
             var selectedCustomerId = $('#customerId').val();
             headers["x-header-one"] = selectedCustomerId;
             
-            var mySqlDataSource = new $.ig.RVMySqlDataSource();
-            mySqlDataSource.id="sqlServer";
-            mySqlDataSource.title = "MySql Server Data Source";
-            mySqlDataSource.subtitle = "Full Northwind Database";
+            var selectedOrderId = $('#orderId').val();
+            headers["x-header-two"] = selectedOrderId;
 
-            var mySqlDataSourceItem = new $.ig.RVMySqlDataSourceItem(mySqlDataSource);
-            mySqlDataSourceItem.id="customer_orders";
-            mySqlDataSourceItem.title = "Customer Orders";
-            mySqlDataSourceItem.subtitle = "Custom Set of Orders Table";
+            var sqlDs = new $.ig.RVMySqlDataSource();
+            sqlDs.id="sqlServer";
+            sqlDs.title = "MySql Server Data Source";
+            sqlDs.subtitle = "Full Northwind Database";
 
-            var mySqlDataSourceItem1 = new $.ig.RVMySqlDataSourceItem(mySqlDataSource);
-            mySqlDataSourceItem1.id="customer_orders_details";
-            mySqlDataSourceItem1.title = "Customer Orders Details";
-            mySqlDataSourceItem1.subtitle = "Custom Query to Customers_Orders_Details View";
+            var dsi1 = new $.ig.RVMySqlDataSourceItem(sqlDs);
+            dsi1.id="customer_orders";
+            dsi1.title = "Customer Orders";
+            dsi1.subtitle = "Custom Set of Orders Table";
 
-            var mySqlDataSourceItem2 = new $.ig.RVMySqlDataSourceItem(mySqlDataSource);
-            mySqlDataSourceItem2.id="sp_customer_orders";
-            mySqlDataSourceItem2.title = "Stored Procedure - Customer_Orders";
-            mySqlDataSourceItem2.subtitle = "@Parameter: Customer";
+            var dsi2 = new $.ig.RVMySqlDataSourceItem(sqlDs);
+            dsi2.id="customer_orders_details";
+            dsi2.title = "Customer Orders Details";
+            dsi2.subtitle = "Custom Query to Customers_Orders_Details View";
 
-            callback(new $.ig.RevealDataSources([mySqlDataSource], 
-                [mySqlDataSourceItem, mySqlDataSourceItem1, mySqlDataSourceItem2], false));
+            var dsi3 = new $.ig.RVMySqlDataSourceItem(sqlDs);
+            dsi3.id="sp_customer_orders";
+            dsi3.title = "Stored Procedure - Customer_Orders";
+            dsi3.subtitle = "@Parameter: Customer";
+
+            callback(new $.ig.RevealDataSources([sqlDs], 
+                [dsi1, dsi2, dsi3], false));
            };
     </script>
 </body>
