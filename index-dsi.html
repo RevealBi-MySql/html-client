@@ -19,13 +19,7 @@ Select Customer
         <option value="11">11</option>
         <option value="12">12</option>
     </select>
-Select Order
-    <select name="orders" id="orderId">
-        <option value="31">31</option>
-        <option value="42">42</option>
-        <option value="51">51</option>
-        <option value="81">81</option>
-    </select>
+
     <p></p>
 
     <div id="viewer"  style="height: calc(100vh - 20px); width: 100%;"></div>
@@ -47,9 +41,6 @@ Select Order
             // Set values to pass to server
             var selectedCustomerId = $('#customerId').val();
             headers["x-header-one"] = selectedCustomerId;
-            
-            var selectedOrderId = $('#orderId').val();
-            headers["x-header-two"] = selectedOrderId;
 
             var sqlDs = new $.ig.RVMySqlDataSource();
             sqlDs.id="sqlServer";
